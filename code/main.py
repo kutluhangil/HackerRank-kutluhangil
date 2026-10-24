@@ -17,7 +17,9 @@ sys.path.insert(0, str(Path(__file__).resolve().parent))
 from ghost_audit.batch import batch_links  # noqa: E402
 from ghost_audit.evidence import build_store  # noqa: E402
 from ghost_audit.identity import IdentityIndex  # noqa: E402
-from ghost_audit.intent import classify_rules  # noqa: E402
+from ghost_audit.intent import classify_all  # noqa: E402
+from ghost_audit.llm import LLM  # noqa: E402
+from ghost_audit.media import media_extractor  # noqa: E402
 from ghost_audit.planner import Planner  # noqa: E402
 
 DATASET = ROOT / "dataset"
@@ -28,8 +30,8 @@ def case_sort_key(cid: str):
     return (head, int(num)) if num.isdigit() else (cid, 0)
 
 
-def workflow_links(requests, dataset, identities, planner, activity, is_deletion) -> dict[str, set]:
-    """Attribute batch workflow activity to cases, using every participant-visible request."""
+def all_requests(requests, dataset) -> list[dict]:
+    """The given requests plus every other participant-visible request (batch context)."""
     context = {r["case_id"]: r for r in requests}
     for name in ("deletion_requests.csv", "sample_deletion_requests.csv"):
         path = dataset / name
@@ -37,7 +39,12 @@ def workflow_links(requests, dataset, identities, planner, activity, is_deletion
             with open(path, newline="", encoding="utf-8") as fh:
                 for r in csv.DictReader(fh):
                     context.setdefault(r["case_id"], r)
-    rows = [r for r in context.values() if is_deletion(r["request_text"])]
+    return list(context.values())
+
+
+def workflow_links(context, identities, planner, activity, intent) -> dict[str, set]:
+    """Attribute batch workflow activity to deletion cases."""
+    rows = [r for r in context if intent.get(r["case_id"])]
     subjects = {r["case_id"]: identities.resolve(r["email"], r["audit_at"]) for r in rows}
     owners = planner.owners(max(r["audit_at"] for r in rows), identities) if rows else {}
     # legacy accounts keep the subject's number in their id (account_005 <-> user_05)
@@ -52,17 +59,20 @@ def workflow_links(requests, dataset, identities, planner, activity, is_deletion
 def run_agent(requests_path: Path, out_path: Path, dataset: Path = DATASET) -> list[dict]:
     with open(dataset / "system_activity.csv", newline="", encoding="utf-8") as fh:
         activity = list(csv.DictReader(fh))
-    store = build_store(dataset, activity)
+    llm = LLM(ROOT / "code" / "cache" / "llm_cache.json", root=ROOT)
+    store = build_store(dataset, activity, media_extractor(llm))
     identities = IdentityIndex(dataset)
     planner = Planner(store, activity)
     with open(requests_path, newline="", encoding="utf-8") as fh:
         requests = list(csv.DictReader(fh))
-    links = workflow_links(requests, dataset, identities, planner, activity, classify_rules)
+    context = all_requests(requests, dataset)
+    intent = classify_all(llm, context)
+    links = workflow_links(context, identities, planner, activity, intent)
 
     rows = []
     for req in sorted(requests, key=lambda r: case_sort_key(r["case_id"])):
         status, steps = "NOT_APPLICABLE", []
-        if classify_rules(req["request_text"]):
+        if intent[req["case_id"]]:
             subj = identities.resolve(req["email"], req["audit_at"])
             if subj is not None:
                 status, steps = planner.plan(subj, req["audit_at"], links.get(req["case_id"], set()))
@@ -74,6 +84,9 @@ def run_agent(requests_path: Path, out_path: Path, dataset: Path = DATASET) -> l
         w = csv.DictWriter(fh, fieldnames=["case_id", "deletion_status", "steps_json"])
         w.writeheader()
         w.writerows(rows)
+    usage_path = out_path.with_suffix(".usage.json")
+    usage_path.write_text(json.dumps({"model": llm.model, "online": llm.online, "requests": len(rows),
+                                      "calls": llm.calls}, indent=1))
     return rows
 
 

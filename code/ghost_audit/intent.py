@@ -10,7 +10,8 @@ KEEP_PATTERNS = [
     r"\b(change|update|replace|correct) (the |my )?(email|e-mail|phone|mobile|number|address|name)",
     r"\b(unsubscribe|opt[- ]out|stop (sending|marketing)|marketing (emails|messages))",
     r"\b(do not|don't|dont) (delete|erase|remove|close)", r"\bnot (want|asking) .*delet",
-    r"\binvoices?\b", r"\baccess (to )?my (data|information)\b", r"\bwhat (data|information) you hold\b",
+    r"\binvoices?\b", r"without (removing|deleting|erasing)", r"marketing (lists?|emails?|messages?)",
+    r"\bnot a request to\b", r"\binformation request\b", r"\bpromotional\b", r"\bresetting the login\b", r"\baccess (to )?my (data|information)\b", r"\bwhat (data|information) you hold\b",
 ]
 DELETE_PATTERNS = [
     r"delet", r"eras", r"remov", r"\bclose (my|this|the) account", r"supprim", r"elimin", r"lösch", r"borr",
@@ -23,3 +24,23 @@ def classify_rules(text: str) -> bool:
     if any(re.search(p, t) for p in KEEP_PATTERNS):
         return False
     return any(re.search(p, t) for p in DELETE_PATTERNS)
+
+
+def classify_all(llm, rows: list[dict], batch_size: int = 25) -> dict[str, bool]:
+    """case_id -> authorizes deletion.  Identical texts are asked once; rules cover any gap."""
+    from .llm import parse_json
+    from .prompts import INTENT_SYSTEM
+
+    texts = sorted({r["request_text"] for r in rows})
+    verdict: dict[str, bool] = {}
+    for start in range(0, len(texts), batch_size):
+        chunk = texts[start:start + batch_size]
+        payload = "\n".join(f"[{i}] {t}" for i, t in enumerate(chunk))
+        answer = parse_json(llm.ask("intent", INTENT_SYSTEM, [{"type": "text", "text": payload}], effort="low"))
+        if isinstance(answer, list):
+            for item in answer:
+                try:
+                    verdict[chunk[int(item["id"])]] = str(item["label"]).upper() == "DELETE"
+                except (KeyError, ValueError, IndexError, TypeError):
+                    continue
+    return {r["case_id"]: verdict.get(r["request_text"], classify_rules(r["request_text"])) for r in rows}

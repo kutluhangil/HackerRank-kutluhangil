@@ -1,0 +1,6 @@
+{
+ "model": "claude-opus-5-5",
+ "online": false,
+ "requests": 32,
+ "calls": []
+}
