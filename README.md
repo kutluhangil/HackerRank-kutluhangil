@@ -36,7 +36,12 @@ python3 code/evaluation/usage_report.py        # writes code/evaluation/usage_re
 ```
 
 Model answers are cached in `code/cache/llm_cache.json` (keyed by model + prompt + input), so a re-run with the
-same inputs repeats no paid call and gives the same output.
+same inputs repeats no paid call and gives the same output. The submitted `code.zip` includes this cache, so
+`python3 code/main.py` without a key reproduces the submitted `output.csv` exactly.
+
+Live requests opt into Anthropic's server-side refusal fallback (`fallbacks: "default"`). If a safety classifier
+declines a request, the API re-runs it on its recommended fallback model; in the final run this happened for one
+screenshot, which `claude-opus-4-8` answered.
 
 Safety of a live run: if any model call fails, is refused, is truncated or returns unusable JSON, the run stops
 with exit code 2 and `output.csv` is left untouched (successful answers stay cached, so a re-run only retries the

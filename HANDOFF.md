@@ -15,7 +15,15 @@ State after session 1 (see log.txt for times). Deadline (assumed from the email 
 - Offline sample score: status 1.00, exact 0.781, step F1 0.979; output.csv validated (0 violations); custom cases 5/5.
 - Reports: `code/evaluation/evaluation_report.md` (measured, offline) and `usage_report.md` (generated; offline run = 0 calls).
 
-## Next
+## Session 2 (2026-10-24, final live run) - DONE
+- Live run completed: 518 rows, 0 contract violations; 33 paid requests in total, about $0.60 (see usage_report.md).
+- Bugs found live and fixed: `parse_json` read the inner `[` of `{"records": [...]}` (all media answers rejected);
+  `evidence_09` refused by a classifier -> server-side `fallbacks: "default"` (answered by claude-opus-4-8).
+- Samples live: status 1.000, exact 0.750, F1 0.969 (offline was 0.781 / 0.979): two cases gained steps from
+  media evidence that predates their request (case_07 object_19, case_17 tombstone_17). Left as is, documented.
+- Keyless `python3 code/main.py` reproduces output.csv byte-for-byte from the cache.
+
+## Next (historical, session 1 plan)
 0. **Do not make any Claude API call until the user explicitly approves it in chat.** Live calls need `--live`.
 1. Preview without network: `python3 code/main.py --dry-run` (expected: 31 requests = 16 intent + 15 media).
 2. After approval: `python3 code/main.py --live`. Exit code 2 = some call failed; output.csv untouched; re-run retries only failures.

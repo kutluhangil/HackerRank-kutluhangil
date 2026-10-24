@@ -1,0 +1,188 @@
+{
+ "02e8d693c57f78ec38c549561c5b54990f45e6a8f0af5dd0d82430293126f4cf": {
+  "input_tokens": 1306,
+  "model": "claude-opus-5-5",
+  "output_tokens": 329,
+  "text": "{\"records\": [{\"resource_id\": \"support_001\", \"system_id\": \"support_platform\", \"record_type\": \"SUPPORT_ATTACHMENT\", \"exists\": true, \"direct_identifiers_visible\": true, \"identifiers\": [\"priya.raman@gmail.com\", \"+91 98765 73142\"], \"enabled\": null, \"restore_allowed\": null, \"retention_until\": null, \"observed_at\": \"2026-09-12T07:30:00Z\"}]}"
+ },
+ "0460e2a22094467426f943d7f107e0cf67979afe15632d5cb075c9db9b74b43b": {
+  "input_tokens": 1691,
+  "model": "claude-opus-5-5",
+  "output_tokens": 404,
+  "text": "[{\"id\":0,\"label\":\"DELETE\"},{\"id\":1,\"label\":\"DELETE\"},{\"id\":2,\"label\":\"DELETE\"},{\"id\":3,\"label\":\"DELETE\"},{\"id\":4,\"label\":\"DELETE\"},{\"id\":5,\"label\":\"DELETE\"},{\"id\":6,\"label\":\"DELETE\"},{\"id\":7,\"label\":\"DELETE\"},{\"id\":8,\"label\":\"DELETE\"},{\"id\":9,\"label\":\"DELETE\"},{\"id\":10,\"label\":\"DELETE\"},{\"id\":11,\"label\":\"DELETE\"},{\"id\":12,\"label\":\"DELETE\"},{\"id\":13,\"label\":\"DELETE\"},{\"id\":14,\"label\":\"DELETE\"},{\"id\":15,\"label\":\"DELETE\"},{\"id\":16,\"label\":\"DELETE\"},{\"id\":17,\"label\":\"DELETE\"},{\"id\":18,\"label\":\"DELETE\"},{\"id\":19,\"label\":\"DELETE\"},{\"id\":20,\"label\":\"DELETE\"},{\"id\":21,\"label\":\"DELETE\"},{\"id\":22,\"label\":\"DELETE\"},{\"id\":23,\"label\":\"DELETE\"},{\"id\":24,\"label\":\"DELETE\"}]"
+ },
+ "104d854e2ad445c33d2e5d1feeb3878c036d2029de656d178c3acb7084913f52": {
+  "input_tokens": 3678,
+  "model": "claude-opus-5-5",
+  "output_tokens": 307,
+  "text": "{\"records\": [{\"resource_id\": \"support_1034\", \"system_id\": \"support_platform\", \"record_type\": \"SUPPORT_MESSAGE\", \"exists\": true, \"direct_identifiers_visible\": true, \"identifiers\": [\"kagyeman8947@fastmail.com\"], \"enabled\": null, \"restore_allowed\": null, \"retention_until\": null, \"observed_at\": \"2026-05-24T07:00:00Z\"}]}"
+ },
+ "20459005bbbe377bf77cc275cc661648a5a6f9808a54dc4009bce3d1f655bae7": {
+  "input_tokens": 1608,
+  "model": "claude-opus-5-5",
+  "output_tokens": 409,
+  "text": "```json\n[{\"id\":0,\"label\":\"DELETE\"},{\"id\":1,\"label\":\"DELETE\"},{\"id\":2,\"label\":\"DELETE\"},{\"id\":3,\"label\":\"DELETE\"},{\"id\":4,\"label\":\"DELETE\"},{\"id\":5,\"label\":\"DELETE\"},{\"id\":6,\"label\":\"DELETE\"},{\"id\":7,\"label\":\"DELETE\"},{\"id\":8,\"label\":\"DELETE\"},{\"id\":9,\"label\":\"DELETE\"},{\"id\":10,\"label\":\"DELETE\"},{\"id\":11,\"label\":\"DELETE\"},{\"id\":12,\"label\":\"DELETE\"},{\"id\":13,\"label\":\"DELETE\"},{\"id\":14,\"label\":\"DELETE\"},{\"id\":15,\"label\":\"DELETE\"},{\"id\":16,\"label\":\"DELETE\"},{\"id\":17,\"label\":\"DELETE\"},{\"id\":18,\"label\":\"DELETE\"},{\"id\":19,\"label\":\"DELETE\"},{\"id\":20,\"label\":\"DELETE\"},{\"id\":21,\"label\":\"DELETE\"},{\"id\":22,\"label\":\"DELETE\"},{\"id\":23,\"label\":\"DELETE\"},{\"id\":24,\"label\":\"DELETE\"}]\n```"
+ },
+ "209485469636fb6e0376e455f1feed18b4b95c692d3ccb0b4f81a8c8127b4a89": {
+  "input_tokens": 3613,
+  "model": "claude-opus-5-5",
+  "output_tokens": 379,
+  "text": "```json\n{\n  \"records\": [\n    {\n      \"resource_id\": \"object_19\",\n      \"system_id\": \"object_storage\",\n      \"record_type\": \"SUPPORT_ATTACHMENT\",\n      \"exists\": true,\n      \"direct_identifiers_visible\": false,\n      \"identifiers\": [],\n      \"enabled\": null,\n      \"restore_allowed\": null,\n      \"retention_until\": null,\n      \"observed_at\": \"2026-02-13T08:00:00Z\"\n    }\n  ]\n}\n```"
+ },
+ "2621601857f0953cae247cff99873dbf7d705566e973167ba1e963916eb6060d": {
+  "input_tokens": 3482,
+  "model": "claude-opus-5-5",
+  "output_tokens": 818,
+  "text": "{\"records\": [\n{\"resource_id\": \"export_1261\", \"system_id\": \"export_service\", \"record_type\": \"USER_EXPORT\", \"exists\": true, \"direct_identifiers_visible\": true, \"identifiers\": [\"marcus.lee@northstar.shop\"], \"enabled\": null, \"restore_allowed\": null, \"retention_until\": null, \"observed_at\": null},\n{\"resource_id\": \"export_1260\", \"system_id\": \"export_service\", \"record_type\": \"USER_EXPORT\", \"exists\": true, \"direct_identifiers_visible\": true, \"identifiers\": [\"ingrid.dahl@outlook.com\"], \"enabled\": null, \"restore_allowed\": null, \"retention_until\": \"2026-06-25T06:42:00Z\", \"observed_at\": \"2026-06-18T06:46:00Z\"},\n{\"resource_id\": \"export_1259\", \"system_id\": \"export_service\", \"record_type\": \"USER_EXPORT\", \"exists\": true, \"direct_identifiers_visible\": true, \"identifiers\": [\"sara.kim@northstar.shop\"], \"enabled\": null, \"restore_allowed\": null, \"retention_until\": null, \"observed_at\": null},\n{\"resource_id\": \"export_1258\", \"system_id\": \"export_service\", \"record_type\": \"USER_EXPORT\", \"exists\": true, \"direct_identifiers_visible\": true, \"identifiers\": [\"daniel.park@northstar.shop\"], \"enabled\": null, \"restore_allowed\": null, \"retention_until\": null, \"observed_at\": null}\n]}"
+ },
+ "29e621a10a8cd835e970d7e07ffd081bb3633ea6794a4a5cc66992fe72dbf1b7": {
+  "input_tokens": 3614,
+  "model": "claude-opus-5-5",
+  "output_tokens": 456,
+  "text": "{\"records\":[{\"resource_id\":\"analytics_7438\",\"system_id\":\"pulse_analytics\",\"record_type\":\"ANALYTICS_PROFILE\",\"exists\":true,\"direct_identifiers_visible\":true,\"identifiers\":[\"user_20\",\"darwish.omar@icloud.com\"],\"enabled\":null,\"restore_allowed\":null,\"retention_until\":null,\"observed_at\":\"2026-07-13T10:00:00Z\"}]}"
+ },
+ "2e0e8080253389ad52f6cab8fe2e501e3338aa2b905d83561c6c837ed5ac80a5": {
+  "input_tokens": 1639,
+  "model": "claude-opus-5-5",
+  "output_tokens": 464,
+  "text": "```json\n[\n{\"id\": 0, \"label\": \"DELETE\"},\n{\"id\": 1, \"label\": \"DELETE\"},\n{\"id\": 2, \"label\": \"DELETE\"},\n{\"id\": 3, \"label\": \"DELETE\"},\n{\"id\": 4, \"label\": \"NOT_DELETE\"},\n{\"id\": 5, \"label\": \"DELETE\"},\n{\"id\": 6, \"label\": \"DELETE\"},\n{\"id\": 7, \"label\": \"DELETE\"},\n{\"id\": 8, \"label\": \"DELETE\"},\n{\"id\": 9, \"label\": \"DELETE\"},\n{\"id\": 10, \"label\": \"DELETE\"},\n{\"id\": 11, \"label\": \"DELETE\"},\n{\"id\": 12, \"label\": \"DELETE\"},\n{\"id\": 13, \"label\": \"DELETE\"},\n{\"id\": 14, \"label\": \"DELETE\"},\n{\"id\": 15, \"label\": \"DELETE\"},\n{\"id\": 16, \"label\": \"DELETE\"},\n{\"id\": 17, \"label\": \"DELETE\"},\n{\"id\": 18, \"label\": \"DELETE\"},\n{\"id\": 19, \"label\": \"DELETE\"},\n{\"id\": 20, \"label\": \"DELETE\"},\n{\"id\": 21, \"label\": \"DELETE\"},\n{\"id\": 22, \"label\": \"DELETE\"},\n{\"id\": 23, \"label\": \"DELETE\"},\n{\"id\": 24, \"label\": \"DELETE\"}\n]\n```"
+ },
+ "369479980e116433601ec6a96e9ee28c904a16a8babedc4b65ad2e53d29d5c07": {
+  "input_tokens": 3613,
+  "model": "claude-opus-5-5",
+  "output_tokens": 1145,
+  "text": "```json\n{\"records\": [\n  {\"resource_id\": \"backup_9291\", \"system_id\": \"vault_recovery_manager\", \"record_type\": \"BACKUP_ARCHIVE\", \"exists\": true, \"direct_identifiers_visible\": true, \"identifiers\": [\"bluepeakco@outlook.com\"], \"enabled\": null, \"restore_allowed\": null, \"retention_until\": null, \"observed_at\": \"2026-04-29T09:00:00Z\"},\n  {\"resource_id\": \"backup_9288\", \"system_id\": \"vault_recovery_manager\", \"record_type\": \"BACKUP_ARCHIVE\", \"exists\": true, \"direct_identifiers_visible\": true, \"identifiers\": [\"miller.logistics@company.com\"], \"enabled\": null, \"restore_allowed\": null, \"retention_until\": null, \"observed_at\": \"2026-04-29T09:00:00Z\"},\n  {\"resource_id\": \"backup_9287\", \"system_id\": \"vault_recovery_manager\", \"record_type\": \"BACKUP_ARCHIVE\", \"exists\": true, \"direct_identifiers_visible\": true, \"identifiers\": [\"areed1433@gmail.com\"], \"enabled\": null, \"restore_allowed\": null, \"retention_until\": \"2026-07-26\", \"observed_at\": \"2026-04-29T09:00:00Z\"},\n  {\"resource_id\": \"backup_9286\", \"system_id\": \"vault_recovery_manager\", \"record_type\": \"BACKUP_ARCHIVE\", \"exists\": true, \"direct_identifiers_visible\": true, \"identifiers\": [\"summit-retail@company.com\"], \"enabled\": null, \"restore_allowed\": null, \"retention_until\": null, \"observed_at\": \"2026-04-29T09:00:00Z\"},\n  {\"resource_id\": \"backup_9281\", \"system_id\": \"vault_recovery_manager\", \"record_type\": \"BACKUP_ARCHIVE\", \"exists\": true, \"direct_identifiers_visible\": false, \"identifiers\": [], \"enabled\": null, \"restore_allowed\": null, \"retention_until\": null, \"observed_at\": null}\n]}\n```"
+ },
+ "424c7bbc21f1d93ed6ec4ea0f3db982e47a6093eb6c09d63d3e105612cba24ea": {
+  "input_tokens": 1662,
+  "model": "claude-opus-5-5",
+  "output_tokens": 543,
+  "text": "```json\n[\n{\"id\": 0, \"label\": \"NOT_DELETE\"},\n{\"id\": 1, \"label\": \"DELETE\"},\n{\"id\": 2, \"label\": \"NOT_DELETE\"},\n{\"id\": 3, \"label\": \"DELETE\"},\n{\"id\": 4, \"label\": \"DELETE\"},\n{\"id\": 5, \"label\": \"DELETE\"},\n{\"id\": 6, \"label\": \"DELETE\"},\n{\"id\": 7, \"label\": \"DELETE\"},\n{\"id\": 8, \"label\": \"DELETE\"},\n{\"id\": 9, \"label\": \"DELETE\"},\n{\"id\": 10, \"label\": \"DELETE\"},\n{\"id\": 11, \"label\": \"DELETE\"},\n{\"id\": 12, \"label\": \"DELETE\"},\n{\"id\": 13, \"label\": \"DELETE\"},\n{\"id\": 14, \"label\": \"DELETE\"},\n{\"id\": 15, \"label\": \"DELETE\"},\n{\"id\": 16, \"label\": \"DELETE\"},\n{\"id\": 17, \"label\": \"DELETE\"},\n{\"id\": 18, \"label\": \"DELETE\"},\n{\"id\": 19, \"label\": \"DELETE\"},\n{\"id\": 20, \"label\": \"DELETE\"},\n{\"id\": 21, \"label\": \"DELETE\"},\n{\"id\": 22, \"label\": \"DELETE\"},\n{\"id\": 23, \"label\": \"DELETE\"},\n{\"id\": 24, \"label\": \"DELETE\"}\n]\n```"
+ },
+ "635eff170afebeab873115aca67177cf55d4949e0ad6c75e1480873c3d356a2b": {
+  "input_tokens": 1611,
+  "model": "claude-opus-5-5",
+  "output_tokens": 404,
+  "text": "[{\"id\":0,\"label\":\"DELETE\"},{\"id\":1,\"label\":\"DELETE\"},{\"id\":2,\"label\":\"DELETE\"},{\"id\":3,\"label\":\"DELETE\"},{\"id\":4,\"label\":\"DELETE\"},{\"id\":5,\"label\":\"DELETE\"},{\"id\":6,\"label\":\"DELETE\"},{\"id\":7,\"label\":\"DELETE\"},{\"id\":8,\"label\":\"DELETE\"},{\"id\":9,\"label\":\"DELETE\"},{\"id\":10,\"label\":\"DELETE\"},{\"id\":11,\"label\":\"DELETE\"},{\"id\":12,\"label\":\"DELETE\"},{\"id\":13,\"label\":\"DELETE\"},{\"id\":14,\"label\":\"DELETE\"},{\"id\":15,\"label\":\"DELETE\"},{\"id\":16,\"label\":\"DELETE\"},{\"id\":17,\"label\":\"DELETE\"},{\"id\":18,\"label\":\"DELETE\"},{\"id\":19,\"label\":\"DELETE\"},{\"id\":20,\"label\":\"DELETE\"},{\"id\":21,\"label\":\"DELETE\"},{\"id\":22,\"label\":\"DELETE\"},{\"id\":23,\"label\":\"DELETE\"},{\"id\":24,\"label\":\"DELETE\"}]"
+ },
+ "63accb87b56ae0f9dfbb2df095f8df1e9dbebfa722c621a01d5c125b7171c732": {
+  "input_tokens": 3481,
+  "model": "claude-opus-4-8",
+  "output_tokens": 296,
+  "text": "{\"records\": [{\"resource_id\":\"search_428\",\"system_id\":\"customer_directory_v3\",\"record_type\":\"SEARCH_INDEX_ENTRY\",\"exists\":true,\"direct_identifiers_visible\":true,\"identifiers\":[\"Gabriel Silva\",\"g.silva76@gmail.com\",\"user_13\"],\"enabled\":null,\"restore_allowed\":null,\"retention_until\":null,\"observed_at\":\"2026-09-01T05:58:21Z\"},{\"resource_id\":\"search_1874\",\"system_id\":\"customer_directory_v3\",\"record_type\":\"SEARCH_INDEX_ENTRY\",\"exists\":true,\"direct_identifiers_visible\":true,\"identifiers\":[\"g.silva76.jr@gmail.com\"],\"enabled\":null,\"restore_allowed\":null,\"retention_until\":null,\"observed_at\":\"2026-09-01T05:55:03Z\"}]}"
+ },
+ "6a5f8acd62f8305b1368e0471ffd6f0b9d670b0f58e4be2ccbb62bfe323d4439": {
+  "input_tokens": 1651,
+  "model": "claude-opus-5-5",
+  "output_tokens": 413,
+  "text": "```json\n[{\"id\":0,\"label\":\"DELETE\"},{\"id\":1,\"label\":\"DELETE\"},{\"id\":2,\"label\":\"DELETE\"},{\"id\":3,\"label\":\"DELETE\"},{\"id\":4,\"label\":\"DELETE\"},{\"id\":5,\"label\":\"DELETE\"},{\"id\":6,\"label\":\"DELETE\"},{\"id\":7,\"label\":\"DELETE\"},{\"id\":8,\"label\":\"NOT_DELETE\"},{\"id\":9,\"label\":\"DELETE\"},{\"id\":10,\"label\":\"DELETE\"},{\"id\":11,\"label\":\"DELETE\"},{\"id\":12,\"label\":\"DELETE\"},{\"id\":13,\"label\":\"DELETE\"},{\"id\":14,\"label\":\"DELETE\"},{\"id\":15,\"label\":\"DELETE\"},{\"id\":16,\"label\":\"DELETE\"},{\"id\":17,\"label\":\"DELETE\"},{\"id\":18,\"label\":\"DELETE\"},{\"id\":19,\"label\":\"DELETE\"},{\"id\":20,\"label\":\"DELETE\"},{\"id\":21,\"label\":\"DELETE\"},{\"id\":22,\"label\":\"DELETE\"},{\"id\":23,\"label\":\"DELETE\"},{\"id\":24,\"label\":\"DELETE\"}]\n```"
+ },
+ "6c78d3d98df29b3a0150fec6c0e9e0fe6e6daf540c621ca10ff1e1eb523c729b": {
+  "input_tokens": 3612,
+  "model": "claude-opus-5-5",
+  "output_tokens": 572,
+  "text": "{\"records\": [{\"resource_id\": \"data_flow_1121\", \"system_id\": \"bridgeops\", \"record_type\": \"DATA_FLOW\", \"exists\": true, \"direct_identifiers_visible\": true, \"identifiers\": [\"jain.aditi@gmail.com\"], \"enabled\": true, \"restore_allowed\": null, \"retention_until\": null, \"observed_at\": \"2026-08-07T07:59:42Z\"}, {\"resource_id\": \"data_flow_9846\", \"system_id\": \"bridgeops\", \"record_type\": \"DATA_FLOW\", \"exists\": true, \"direct_identifiers_visible\": true, \"identifiers\": [\"lucia-torres@gmail.com\"], \"enabled\": true, \"restore_allowed\": null, \"retention_until\": null, \"observed_at\": \"2026-08-07T07:59:36Z\"}]}"
+ },
+ "6e7e1f520a505b07b3cf59c8aa17d8ebc9baed1dd5a41ec0eccc23690e900eb5": {
+  "input_tokens": 1682,
+  "model": "claude-opus-5-5",
+  "output_tokens": 460,
+  "text": "All 25 requests ask for deletion. Items 10 and 11 ask to remove records linked to old and current email addresses, which counts as wiping personal data.\n\n```json\n[{\"id\":0,\"label\":\"DELETE\"},{\"id\":1,\"label\":\"DELETE\"},{\"id\":2,\"label\":\"DELETE\"},{\"id\":3,\"label\":\"DELETE\"},{\"id\":4,\"label\":\"DELETE\"},{\"id\":5,\"label\":\"DELETE\"},{\"id\":6,\"label\":\"DELETE\"},{\"id\":7,\"label\":\"DELETE\"},{\"id\":8,\"label\":\"DELETE\"},{\"id\":9,\"label\":\"DELETE\"},{\"id\":10,\"label\":\"DELETE\"},{\"id\":11,\"label\":\"DELETE\"},{\"id\":12,\"label\":\"DELETE\"},{\"id\":13,\"label\":\"DELETE\"},{\"id\":14,\"label\":\"DELETE\"},{\"id\":15,\"label\":\"DELETE\"},{\"id\":16,\"label\":\"DELETE\"},{\"id\":17,\"label\":\"DELETE\"},{\"id\":18,\"label\":\"DELETE\"},{\"id\":19,\"label\":\"DELETE\"},{\"id\":20,\"label\":\"DELETE\"},{\"id\":21,\"label\":\"DELETE\"},{\"id\":22,\"label\":\"DELETE\"},{\"id\":23,\"label\":\"DELETE\"},{\"id\":24,\"label\":\"DELETE\"}]\n```"
+ },
+ "70bb1869d8683b08ac665e95be5e52c88635e95277e51b66873da633a7c1198a": {
+  "input_tokens": 1287,
+  "model": "claude-opus-5-5",
+  "output_tokens": 357,
+  "text": "{\"records\":[{\"resource_id\":\"export_1842\",\"system_id\":\"export_service\",\"record_type\":\"USER_EXPORT\",\"exists\":true,\"direct_identifiers_visible\":true,\"identifiers\":[\"user_18\",\"ingrid.dahl@outlook.com\"],\"enabled\":null,\"restore_allowed\":null,\"retention_until\":null,\"observed_at\":\"2026-07-18T11:00:00Z\"}]}"
+ },
+ "714a526a8c136919a116c23a81e3a59a63bdd17beb889b4c0302bde548d2896c": {
+  "input_tokens": 2662,
+  "model": "claude-opus-5-5",
+  "output_tokens": 338,
+  "text": "```json\n{\"records\":[{\"resource_id\":\"marketing_001\",\"system_id\":\"audience_operations\",\"record_type\":\"MARKETING_PROFILE\",\"exists\":true,\"direct_identifiers_visible\":true,\"identifiers\":[\"sj.park@naver.com\",\"+82 10-5837-9451\"],\"enabled\":null,\"restore_allowed\":null,\"retention_until\":null,\"observed_at\":\"2026-09-15T23:40:00Z\"}]}\n```"
+ },
+ "795fbb36f1cff08aa4c66f8d446eb7da0be5a101b941060d6aa18a3c0e0d5e45": {
+  "input_tokens": 1728,
+  "model": "claude-opus-5-5",
+  "output_tokens": 453,
+  "text": "[{\"id\": 0, \"label\": \"DELETE\"}, {\"id\": 1, \"label\": \"DELETE\"}, {\"id\": 2, \"label\": \"DELETE\"}, {\"id\": 3, \"label\": \"DELETE\"}, {\"id\": 4, \"label\": \"DELETE\"}, {\"id\": 5, \"label\": \"DELETE\"}, {\"id\": 6, \"label\": \"DELETE\"}, {\"id\": 7, \"label\": \"DELETE\"}, {\"id\": 8, \"label\": \"DELETE\"}, {\"id\": 9, \"label\": \"DELETE\"}, {\"id\": 10, \"label\": \"DELETE\"}, {\"id\": 11, \"label\": \"DELETE\"}, {\"id\": 12, \"label\": \"DELETE\"}, {\"id\": 13, \"label\": \"DELETE\"}, {\"id\": 14, \"label\": \"DELETE\"}, {\"id\": 15, \"label\": \"DELETE\"}, {\"id\": 16, \"label\": \"DELETE\"}, {\"id\": 17, \"label\": \"DELETE\"}, {\"id\": 18, \"label\": \"DELETE\"}, {\"id\": 19, \"label\": \"DELETE\"}, {\"id\": 20, \"label\": \"DELETE\"}, {\"id\": 21, \"label\": \"DELETE\"}, {\"id\": 22, \"label\": \"DELETE\"}, {\"id\": 23, \"label\": \"DELETE\"}, {\"id\": 24, \"label\": \"DELETE\"}]"
+ },
+ "8c742a5a421f7301280302de9a96c397e73b452757db3c388ea8c749984a6ecb": {
+  "input_tokens": 1643,
+  "model": "claude-opus-5-5",
+  "output_tokens": 417,
+  "text": "```json\n[{\"id\":0,\"label\":\"DELETE\"},{\"id\":1,\"label\":\"DELETE\"},{\"id\":2,\"label\":\"NOT_DELETE\"},{\"id\":3,\"label\":\"DELETE\"},{\"id\":4,\"label\":\"NOT_DELETE\"},{\"id\":5,\"label\":\"DELETE\"},{\"id\":6,\"label\":\"DELETE\"},{\"id\":7,\"label\":\"DELETE\"},{\"id\":8,\"label\":\"DELETE\"},{\"id\":9,\"label\":\"DELETE\"},{\"id\":10,\"label\":\"DELETE\"},{\"id\":11,\"label\":\"DELETE\"},{\"id\":12,\"label\":\"DELETE\"},{\"id\":13,\"label\":\"DELETE\"},{\"id\":14,\"label\":\"DELETE\"},{\"id\":15,\"label\":\"DELETE\"},{\"id\":16,\"label\":\"DELETE\"},{\"id\":17,\"label\":\"DELETE\"},{\"id\":18,\"label\":\"DELETE\"},{\"id\":19,\"label\":\"DELETE\"},{\"id\":20,\"label\":\"DELETE\"},{\"id\":21,\"label\":\"DELETE\"},{\"id\":22,\"label\":\"DELETE\"},{\"id\":23,\"label\":\"DELETE\"},{\"id\":24,\"label\":\"DELETE\"}]\n```"
+ },
+ "8d45ca4a0e7cbc03ac8a4eae3cf54fcae92719e9229136152b4c04638e30bffc": {
+  "input_tokens": 1650,
+  "model": "claude-opus-5-5",
+  "output_tokens": 412,
+  "text": "[{\"id\":0,\"label\":\"DELETE\"},{\"id\":1,\"label\":\"DELETE\"},{\"id\":2,\"label\":\"DELETE\"},{\"id\":3,\"label\":\"DELETE\"},{\"id\":4,\"label\":\"NOT_DELETE\"},{\"id\":5,\"label\":\"DELETE\"},{\"id\":6,\"label\":\"DELETE\"},{\"id\":7,\"label\":\"DELETE\"},{\"id\":8,\"label\":\"DELETE\"},{\"id\":9,\"label\":\"NOT_DELETE\"},{\"id\":10,\"label\":\"DELETE\"},{\"id\":11,\"label\":\"DELETE\"},{\"id\":12,\"label\":\"DELETE\"},{\"id\":13,\"label\":\"DELETE\"},{\"id\":14,\"label\":\"DELETE\"},{\"id\":15,\"label\":\"DELETE\"},{\"id\":16,\"label\":\"DELETE\"},{\"id\":17,\"label\":\"DELETE\"},{\"id\":18,\"label\":\"DELETE\"},{\"id\":19,\"label\":\"DELETE\"},{\"id\":20,\"label\":\"DELETE\"},{\"id\":21,\"label\":\"DELETE\"},{\"id\":22,\"label\":\"DELETE\"},{\"id\":23,\"label\":\"DELETE\"},{\"id\":24,\"label\":\"DELETE\"}]"
+ },
+ "9d365f51dfbc6f7c035860a4bb382aadb0518db44182a0065acebe1deadb32c6": {
+  "input_tokens": 1570,
+  "model": "claude-opus-5-5",
+  "output_tokens": 404,
+  "text": "[{\"id\":0,\"label\":\"DELETE\"},{\"id\":1,\"label\":\"DELETE\"},{\"id\":2,\"label\":\"DELETE\"},{\"id\":3,\"label\":\"DELETE\"},{\"id\":4,\"label\":\"DELETE\"},{\"id\":5,\"label\":\"DELETE\"},{\"id\":6,\"label\":\"DELETE\"},{\"id\":7,\"label\":\"DELETE\"},{\"id\":8,\"label\":\"DELETE\"},{\"id\":9,\"label\":\"DELETE\"},{\"id\":10,\"label\":\"DELETE\"},{\"id\":11,\"label\":\"DELETE\"},{\"id\":12,\"label\":\"DELETE\"},{\"id\":13,\"label\":\"DELETE\"},{\"id\":14,\"label\":\"DELETE\"},{\"id\":15,\"label\":\"DELETE\"},{\"id\":16,\"label\":\"DELETE\"},{\"id\":17,\"label\":\"DELETE\"},{\"id\":18,\"label\":\"DELETE\"},{\"id\":19,\"label\":\"DELETE\"},{\"id\":20,\"label\":\"DELETE\"},{\"id\":21,\"label\":\"DELETE\"},{\"id\":22,\"label\":\"DELETE\"},{\"id\":23,\"label\":\"DELETE\"},{\"id\":24,\"label\":\"DELETE\"}]"
+ },
+ "b9d6c5f303b2ee7d041e810ab2a00c04be9570e3ba9c0080ef71048a00762287": {
+  "input_tokens": 3484,
+  "model": "claude-opus-5-5",
+  "output_tokens": 633,
+  "text": "```json\n{\"records\": [{\"resource_id\": \"tombstone_17\", \"system_id\": \"account_platform\", \"record_type\": \"ACCOUNT_TOMBSTONE\", \"exists\": true, \"direct_identifiers_visible\": false, \"identifiers\": [\"user_17\"], \"enabled\": null, \"restore_allowed\": null, \"retention_until\": null, \"observed_at\": \"2026-03-10T07:18:00Z\"}]}\n```"
+ },
+ "c15339d998c18128f0145bdf415a0f366bb5e91fd554550dfbd4a0906146e43d": {
+  "input_tokens": 1703,
+  "model": "claude-opus-5-5",
+  "output_tokens": 404,
+  "text": "[{\"id\":0,\"label\":\"DELETE\"},{\"id\":1,\"label\":\"DELETE\"},{\"id\":2,\"label\":\"DELETE\"},{\"id\":3,\"label\":\"DELETE\"},{\"id\":4,\"label\":\"DELETE\"},{\"id\":5,\"label\":\"DELETE\"},{\"id\":6,\"label\":\"DELETE\"},{\"id\":7,\"label\":\"DELETE\"},{\"id\":8,\"label\":\"DELETE\"},{\"id\":9,\"label\":\"DELETE\"},{\"id\":10,\"label\":\"DELETE\"},{\"id\":11,\"label\":\"DELETE\"},{\"id\":12,\"label\":\"DELETE\"},{\"id\":13,\"label\":\"DELETE\"},{\"id\":14,\"label\":\"DELETE\"},{\"id\":15,\"label\":\"DELETE\"},{\"id\":16,\"label\":\"DELETE\"},{\"id\":17,\"label\":\"DELETE\"},{\"id\":18,\"label\":\"DELETE\"},{\"id\":19,\"label\":\"DELETE\"},{\"id\":20,\"label\":\"DELETE\"},{\"id\":21,\"label\":\"DELETE\"},{\"id\":22,\"label\":\"DELETE\"},{\"id\":23,\"label\":\"DELETE\"},{\"id\":24,\"label\":\"DELETE\"}]"
+ },
+ "c957068ac461662e0083b874b42e2939eedd97ac64b2aa8ff514b82a2350732f": {
+  "input_tokens": 1652,
+  "model": "claude-opus-5-5",
+  "output_tokens": 487,
+  "text": "```json\n[{\"id\":0,\"label\":\"DELETE\"},{\"id\":1,\"label\":\"DELETE\"},{\"id\":2,\"label\":\"DELETE\"},{\"id\":3,\"label\":\"DELETE\"},{\"id\":4,\"label\":\"DELETE\"},{\"id\":5,\"label\":\"DELETE\"},{\"id\":6,\"label\":\"DELETE\"},{\"id\":7,\"label\":\"DELETE\"},{\"id\":8,\"label\":\"DELETE\"},{\"id\":9,\"label\":\"DELETE\"},{\"id\":10,\"label\":\"DELETE\"},{\"id\":11,\"label\":\"DELETE\"},{\"id\":12,\"label\":\"DELETE\"},{\"id\":13,\"label\":\"DELETE\"},{\"id\":14,\"label\":\"DELETE\"},{\"id\":15,\"label\":\"DELETE\"},{\"id\":16,\"label\":\"DELETE\"},{\"id\":17,\"label\":\"DELETE\"},{\"id\":18,\"label\":\"DELETE\"},{\"id\":19,\"label\":\"NOT_DELETE\"},{\"id\":20,\"label\":\"DELETE\"},{\"id\":21,\"label\":\"DELETE\"},{\"id\":22,\"label\":\"DELETE\"}]\n```"
+ },
+ "ca9ef6f253ab33666f33507ac13747c312ad689931fbcb4a9eac7656f33fbdfc": {
+  "input_tokens": 3677,
+  "model": "claude-opus-5-5",
+  "output_tokens": 632,
+  "text": "{\"records\": [{\"resource_id\": \"account_5762\", \"system_id\": \"account_service\", \"record_type\": \"USER_PROFILE\", \"exists\": true, \"direct_identifiers_visible\": true, \"identifiers\": [\"haruka.s1838@zoho.com\", \"+81 90 7610 2507\", \"user_11\"], \"enabled\": null, \"restore_allowed\": null, \"retention_until\": null, \"observed_at\": \"2026-09-26T11:00:00Z\"}, {\"resource_id\": \"support_9538\", \"system_id\": \"support_platform\", \"record_type\": \"SUPPORT_MESSAGE\", \"exists\": true, \"direct_identifiers_visible\": false, \"identifiers\": [], \"enabled\": null, \"restore_allowed\": null, \"retention_until\": null, \"observed_at\": \"2026-09-26T11:00:00Z\"}]}"
+ },
+ "cd81d03335fd80b0fed941c2f8ca8baecd9806e06b22cc6e2144eadc013ca7b1": {
+  "input_tokens": 3484,
+  "model": "claude-opus-5-5",
+  "output_tokens": 1000,
+  "text": "{\"records\": [\n{\"resource_id\": \"audit_record_003\", \"system_id\": \"sentinel\", \"record_type\": \"SECURITY_AUDIT_LOG\", \"exists\": true, \"direct_identifiers_visible\": false, \"identifiers\": [\"user_03\"], \"enabled\": null, \"restore_allowed\": null, \"retention_until\": null, \"observed_at\": \"2026-08-25T04:03:00Z\"},\n{\"resource_id\": \"audit_record_002\", \"system_id\": \"sentinel\", \"record_type\": \"SECURITY_AUDIT_LOG\", \"exists\": true, \"direct_identifiers_visible\": false, \"identifiers\": [\"user_03\"], \"enabled\": null, \"restore_allowed\": null, \"retention_until\": null, \"observed_at\": \"2026-08-25T03:21:00Z\"},\n{\"resource_id\": \"audit_record_001\", \"system_id\": \"sentinel\", \"record_type\": \"SECURITY_AUDIT_LOG\", \"exists\": true, \"direct_identifiers_visible\": false, \"identifiers\": [\"user_03\"], \"enabled\": null, \"restore_allowed\": null, \"retention_until\": null, \"observed_at\": \"2026-08-24T16:14:00Z\"},\n{\"resource_id\": \"audit_record_006\", \"system_id\": \"sentinel\", \"record_type\": \"SECURITY_AUDIT_LOG\", \"exists\": true, \"direct_identifiers_visible\": false, \"identifiers\": [\"user_03\"], \"enabled\": null, \"restore_allowed\": null, \"retention_until\": null, \"observed_at\": \"2026-08-22T11:27:00Z\"},\n{\"resource_id\": \"audit_record_005\", \"system_id\": \"sentinel\", \"record_type\": \"SECURITY_AUDIT_LOG\", \"exists\": true, \"direct_identifiers_visible\": false, \"identifiers\": [\"user_03\"], \"enabled\": null, \"restore_allowed\": null, \"retention_until\": null, \"observed_at\": \"2026-08-20T09:42:00Z\"},\n{\"resource_id\": \"audit_record_004\", \"system_id\": \"sentinel\", \"record_type\": \"SECURITY_AUDIT_LOG\", \"exists\": true, \"direct_identifiers_visible\": false, \"identifiers\": [\"user_03\"], \"enabled\": null, \"restore_allowed\": null, \"retention_until\": null, \"observed_at\": \"2026-08-18T14:05:00Z\"}\n]}"
+ },
+ "db8570e9efdcabd92dd1f6c6247fa2173fadfce6bd7aaf2a2c953de913a1c911": {
+  "input_tokens": 1404,
+  "model": "claude-opus-5-5",
+  "output_tokens": 1293,
+  "text": "{\"records\": [\n{\"resource_id\": null, \"system_id\": null, \"record_type\": \"LEGAL_HOLD_RECORD\", \"exists\": true, \"direct_identifiers_visible\": false, \"identifiers\": [\"user_08\"], \"enabled\": null, \"restore_allowed\": null, \"retention_until\": \"2033-05-04\", \"observed_at\": \"2026-05-29T08:00:00Z\"},\n{\"resource_id\": null, \"system_id\": null, \"record_type\": \"LEGAL_HOLD_RECORD\", \"exists\": true, \"direct_identifiers_visible\": false, \"identifiers\": [\"user_12\"], \"enabled\": null, \"restore_allowed\": null, \"retention_until\": \"2033-05-09\", \"observed_at\": \"2026-05-29T08:00:00Z\"},\n{\"resource_id\": \"tombstone_17\", \"system_id\": null, \"record_type\": \"ACCOUNT_TOMBSTONE\", \"exists\": true, \"direct_identifiers_visible\": false, \"identifiers\": [\"user_17\"], \"enabled\": null, \"restore_allowed\": null, \"retention_until\": \"2033-05-14\", \"observed_at\": \"2026-05-29T08:00:00Z\"},\n{\"resource_id\": null, \"system_id\": null, \"record_type\": \"LEGAL_HOLD_RECORD\", \"exists\": true, \"direct_identifiers_visible\": false, \"identifiers\": [\"user_21\"], \"enabled\": null, \"restore_allowed\": null, \"retention_until\": \"2033-05-18\", \"observed_at\": \"2026-05-29T08:00:00Z\"},\n{\"resource_id\": null, \"system_id\": null, \"record_type\": \"LEGAL_HOLD_RECORD\", \"exists\": true, \"direct_identifiers_visible\": false, \"identifiers\": [\"user_24\"], \"enabled\": null, \"restore_allowed\": null, \"retention_until\": \"2033-05-23\", \"observed_at\": \"2026-05-29T08:00:00Z\"},\n{\"resource_id\": null, \"system_id\": null, \"record_type\": \"LEGAL_HOLD_RECORD\", \"exists\": true, \"direct_identifiers_visible\": false, \"identifiers\": [\"user_29\"], \"enabled\": null, \"restore_allowed\": null, \"retention_until\": \"2033-05-28\", \"observed_at\": \"2026-05-29T08:00:00Z\"}\n]}"
+ },
+ "ddde190a8df50148ac00475593e9e433ec9e110a39a0a810321c2672727848fe": {
+  "input_tokens": 1636,
+  "model": "claude-opus-5-5",
+  "output_tokens": 439,
+  "text": "```json\n[\n{\"id\":0,\"label\":\"DELETE\"},\n{\"id\":1,\"label\":\"DELETE\"},\n{\"id\":2,\"label\":\"DELETE\"},\n{\"id\":3,\"label\":\"DELETE\"},\n{\"id\":4,\"label\":\"DELETE\"},\n{\"id\":5,\"label\":\"DELETE\"},\n{\"id\":6,\"label\":\"DELETE\"},\n{\"id\":7,\"label\":\"DELETE\"},\n{\"id\":8,\"label\":\"DELETE\"},\n{\"id\":9,\"label\":\"DELETE\"},\n{\"id\":10,\"label\":\"DELETE\"},\n{\"id\":11,\"label\":\"DELETE\"},\n{\"id\":12,\"label\":\"DELETE\"},\n{\"id\":13,\"label\":\"DELETE\"},\n{\"id\":14,\"label\":\"DELETE\"},\n{\"id\":15,\"label\":\"DELETE\"},\n{\"id\":16,\"label\":\"DELETE\"},\n{\"id\":17,\"label\":\"DELETE\"},\n{\"id\":18,\"label\":\"DELETE\"},\n{\"id\":19,\"label\":\"DELETE\"},\n{\"id\":20,\"label\":\"DELETE\"},\n{\"id\":21,\"label\":\"DELETE\"},\n{\"id\":22,\"label\":\"NOT_DELETE\"},\n{\"id\":23,\"label\":\"DELETE\"},\n{\"id\":24,\"label\":\"DELETE\"}\n]\n```"
+ },
+ "e88831f7d83705585e2685fbc9103abb3014900129dba094043d9326120faf93": {
+  "input_tokens": 1623,
+  "model": "claude-opus-5-5",
+  "output_tokens": 404,
+  "text": "[{\"id\":0,\"label\":\"DELETE\"},{\"id\":1,\"label\":\"DELETE\"},{\"id\":2,\"label\":\"DELETE\"},{\"id\":3,\"label\":\"DELETE\"},{\"id\":4,\"label\":\"DELETE\"},{\"id\":5,\"label\":\"DELETE\"},{\"id\":6,\"label\":\"DELETE\"},{\"id\":7,\"label\":\"DELETE\"},{\"id\":8,\"label\":\"DELETE\"},{\"id\":9,\"label\":\"DELETE\"},{\"id\":10,\"label\":\"DELETE\"},{\"id\":11,\"label\":\"DELETE\"},{\"id\":12,\"label\":\"DELETE\"},{\"id\":13,\"label\":\"DELETE\"},{\"id\":14,\"label\":\"DELETE\"},{\"id\":15,\"label\":\"DELETE\"},{\"id\":16,\"label\":\"DELETE\"},{\"id\":17,\"label\":\"DELETE\"},{\"id\":18,\"label\":\"DELETE\"},{\"id\":19,\"label\":\"DELETE\"},{\"id\":20,\"label\":\"DELETE\"},{\"id\":21,\"label\":\"DELETE\"},{\"id\":22,\"label\":\"DELETE\"},{\"id\":23,\"label\":\"DELETE\"},{\"id\":24,\"label\":\"DELETE\"}]"
+ },
+ "f02f77283dc2e0712fc8369c28571c84d39f884e748b86f37a0281735cc96e84": {
+  "input_tokens": 1649,
+  "model": "claude-opus-5-5",
+  "output_tokens": 404,
+  "text": "[{\"id\":0,\"label\":\"DELETE\"},{\"id\":1,\"label\":\"DELETE\"},{\"id\":2,\"label\":\"DELETE\"},{\"id\":3,\"label\":\"DELETE\"},{\"id\":4,\"label\":\"DELETE\"},{\"id\":5,\"label\":\"DELETE\"},{\"id\":6,\"label\":\"DELETE\"},{\"id\":7,\"label\":\"DELETE\"},{\"id\":8,\"label\":\"DELETE\"},{\"id\":9,\"label\":\"DELETE\"},{\"id\":10,\"label\":\"DELETE\"},{\"id\":11,\"label\":\"DELETE\"},{\"id\":12,\"label\":\"DELETE\"},{\"id\":13,\"label\":\"DELETE\"},{\"id\":14,\"label\":\"DELETE\"},{\"id\":15,\"label\":\"DELETE\"},{\"id\":16,\"label\":\"DELETE\"},{\"id\":17,\"label\":\"DELETE\"},{\"id\":18,\"label\":\"DELETE\"},{\"id\":19,\"label\":\"DELETE\"},{\"id\":20,\"label\":\"DELETE\"},{\"id\":21,\"label\":\"DELETE\"},{\"id\":22,\"label\":\"DELETE\"},{\"id\":23,\"label\":\"DELETE\"},{\"id\":24,\"label\":\"DELETE\"}]"
+ },
+ "f1c1529d7704216ae90094d0db6273c8207c69097a04baf32ccb50a1dab88023": {
+  "input_tokens": 1198,
+  "model": "claude-opus-5-5",
+  "output_tokens": 477,
+  "text": "```json\n{\"records\": [{\"resource_id\": \"audit_record_003\", \"system_id\": \"compliance_journal\", \"record_type\": \"SECURITY_AUDIT_LOG\", \"exists\": true, \"direct_identifiers_visible\": false, \"identifiers\": [\"user_03\"], \"enabled\": null, \"restore_allowed\": null, \"retention_until\": \"2027-08-25T04:03:00Z\", \"observed_at\": \"2026-08-25T04:03:00Z\"}]}\n```"
+ }
+}
