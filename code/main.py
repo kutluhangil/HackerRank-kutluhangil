@@ -81,7 +81,7 @@ def run_agent(requests_path: Path, out_path: Path, dataset: Path = DATASET) -> l
         rows.append({"case_id": req["case_id"], "deletion_status": status,
                      "steps_json": json.dumps(steps, ensure_ascii=False, separators=(",", ":"))})
     with open(out_path, "w", newline="", encoding="utf-8") as fh:
-        w = csv.DictWriter(fh, fieldnames=["case_id", "deletion_status", "steps_json"])
+        w = csv.DictWriter(fh, fieldnames=["case_id", "deletion_status", "steps_json"], lineterminator="\n")
         w.writeheader()
         w.writerows(rows)
     usage_path = out_path.with_suffix(".usage.json")
