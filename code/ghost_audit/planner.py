@@ -134,7 +134,7 @@ class Planner:
         system = system_of(rid)
         cands = [o for o in self.by_rid.get(rid, []) if self.available(o, audit_at)]
         for sc in self.store.scopes:
-            if sc.system == system and system in OMISSION_SYSTEMS and sc.rids and rid not in sc.rids and sc.t <= audit_at and \
+            if sc.system == system and system in OMISSION_SYSTEMS and rid not in sc.rids and sc.t <= audit_at and \
                     self.store.files[sc.eid].captured_at <= audit_at:
                 cands.append(Obs(sc.eid, sc.t, system, rid, present=False, source="scope:omission"))
         if not cands:

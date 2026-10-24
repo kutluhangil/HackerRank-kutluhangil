@@ -1,8 +1,8 @@
 """Thin Claude client: disk cache, usage accounting, graceful offline fallback.
 
 Credentials come from the environment only (ORCHESTRATE_ANTHROPIC_API_KEY, then
-ANTHROPIC_API_KEY).  Without a key every call returns None and callers fall back to
-their deterministic paths, so the pipeline always completes.
+ANTHROPIC_API_KEY).  Live calls happen only with `--live`; otherwise answers come from the
+cache or callers fall back to their deterministic paths, so the pipeline always completes.
 """
 from __future__ import annotations
 
@@ -33,7 +33,8 @@ def _load_dotenv(root: Path):
 
 
 class LLM:
-    def __init__(self, cache_path: Path, root: Optional[Path] = None, model: str = DEFAULT_MODEL):
+    def __init__(self, cache_path: Path, root: Optional[Path] = None, model: str = DEFAULT_MODEL,
+                 live: bool = False):
         if root:
             _load_dotenv(root)
         self.model = model
@@ -41,9 +42,10 @@ class LLM:
         self.cache: dict = json.loads(cache_path.read_text()) if cache_path.exists() else {}
         self.lock = threading.Lock()
         self.calls: list[dict] = []          # every request made in this run (live or cached)
+        self.live = live
         key = os.environ.get("ORCHESTRATE_ANTHROPIC_API_KEY") or os.environ.get("ANTHROPIC_API_KEY")
         self.client = None
-        if key:
+        if key and live:            # network calls only when explicitly requested with --live
             try:
                 import anthropic
                 self.client = anthropic.Anthropic(api_key=key, base_url=API_URL, max_retries=4, timeout=180.0)

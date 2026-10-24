@@ -1,6 +1,6 @@
 # Handoff notes (for the next coding session)
 
-State as of 2026-10-24 ~23:45 UTC (session 1). Deadline (assumed): 2026-10-25 17:33 UTC (20:33 Turkey time).
+State after session 1 (see log.txt for times). Deadline (assumed from the email time 20:33 GMT+3): 2026-10-25 17:33 UTC.
 
 ## Done
 - `code/ghost_audit/evidence.py` – parsers for SQL / JSON / 5 log dialects / text handover / activity checks -> `Obs`.
@@ -12,15 +12,17 @@ State as of 2026-10-24 ~23:45 UTC (session 1). Deadline (assumed): 2026-10-25 17
 - `intent.py` + `llm.py` + `media.py` + `prompts.py` – Claude for request intent and screenshots/PDFs,
   disk cache in `code/cache/llm_cache.json`, offline fallback (rules / pdftotext).
 - `code/evaluation/main.py` – scores against sample_output (status, exact, step P/R/F1, LCS sequence, field accuracy).
-- Offline sample score: status 1.00, exact 0.75, step F1 0.974.
+- Offline sample score: status 1.00, exact 0.781, step F1 0.979; output.csv validated (0 violations); custom cases 5/5.
+- Reports: `code/evaluation/evaluation_report.md` (measured, offline) and `usage_report.md` (generated; offline run = 0 calls).
 
 ## Next
-1. New session must have `ORCHESTRATE_ANTHROPIC_API_KEY` (cloud env variable). Run `python3 code/main.py`
-   (live LLM calls are cached), then `python3 code/evaluation/main.py`.
+0. **Do not make any Claude API call until the user explicitly approves it in chat.** Live calls need `--live`.
+1. New session has `ORCHESTRATE_ANTHROPIC_API_KEY` (cloud env variable). After approval: `python3 code/main.py --live`
+   (answers are cached), then `python3 code/evaluation/main.py`, `validate_output.py`, `custom_cases.py`,
+   `usage_report.py`, and update the numbers in `evaluation_report.md`.
 2. Check media extraction output for the 11 PNGs + 4 PDFs (users 11-22 cases 33+).
-3. Write `code/evaluation/evaluation_report.md` (metrics + >=3 custom cases + failures/improvements)
-   and `code/evaluation/usage_report.md` (from `output.usage.json`).
-4. Root `README.md` run instructions; package `code.zip`; keep appending to `log.txt`.
+3. Package: `zip -r code.zip README.md code -x "*/__pycache__/*" "*/.venv/*" "*/venv/*" "*/node_modules/*" "*/.git/*" "*/.DS_Store"`.
+4. Keep appending to `log.txt` with real `date -u` timestamps.
 
 ## Known gaps
 - Some gold resources are not discoverable from participant data (e.g. audit_record_6645, 5569).

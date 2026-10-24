@@ -2,6 +2,7 @@
 
     python3 code/main.py                      # audits dataset/deletion_requests.csv -> ./output.csv
     python3 code/main.py --requests R --out O # any request file
+    python3 code/main.py --live               # additionally allow Claude API calls (otherwise cache/offline)
 """
 from __future__ import annotations
 
@@ -56,10 +57,10 @@ def workflow_links(context, identities, planner, activity, intent) -> dict[str, 
     return batch_links(rows, subjects, owners, activity)
 
 
-def run_agent(requests_path: Path, out_path: Path, dataset: Path = DATASET) -> list[dict]:
+def run_agent(requests_path: Path, out_path: Path, dataset: Path = DATASET, live: bool = False) -> list[dict]:
     with open(dataset / "system_activity.csv", newline="", encoding="utf-8") as fh:
         activity = list(csv.DictReader(fh))
-    llm = LLM(ROOT / "code" / "cache" / "llm_cache.json", root=ROOT)
+    llm = LLM(ROOT / "code" / "cache" / "llm_cache.json", root=ROOT, live=live)
     store = build_store(dataset, activity, media_extractor(llm))
     identities = IdentityIndex(dataset)
     planner = Planner(store, activity)
@@ -85,7 +86,7 @@ def run_agent(requests_path: Path, out_path: Path, dataset: Path = DATASET) -> l
         w.writeheader()
         w.writerows(rows)
     usage_path = out_path.with_suffix(".usage.json")
-    usage_path.write_text(json.dumps({"model": llm.model, "online": llm.online, "requests": len(rows),
+    usage_path.write_text(json.dumps({"model": llm.model, "live": llm.online, "requests": len(rows),
                                       "calls": llm.calls}, indent=1))
     return rows
 
@@ -94,9 +95,11 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--requests", default=str(DATASET / "deletion_requests.csv"))
     ap.add_argument("--out", default=str(ROOT / "output.csv"))
+    ap.add_argument("--live", action="store_true",
+                    help="allow Claude API calls (needs ORCHESTRATE_ANTHROPIC_API_KEY); default: cache + offline fallback")
     args = ap.parse_args()
-    rows = run_agent(Path(args.requests), Path(args.out))
-    print(f"wrote {len(rows)} rows to {args.out}")
+    rows = run_agent(Path(args.requests), Path(args.out), live=args.live)
+    print(f"wrote {len(rows)} rows to {args.out} ({'live' if args.live else 'offline/cache'} mode)")
 
 
 if __name__ == "__main__":

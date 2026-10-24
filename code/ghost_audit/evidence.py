@@ -238,7 +238,9 @@ def ingest_sql(store: EvidenceStore, f: EvidenceFile):
         # account snapshot tables (primary / replica) list every live profile
         if table.startswith("customer_profiles_"):
             present_by_system.setdefault("account_service", set())
-    for system, t in scope_systems.items():
+    # an inventory capture with no rows at all is a failed export, not proof that everything is gone
+    captured_rows = sum(len(v) for v in present_by_system.values())
+    for system, t in (scope_systems.items() if captured_rows else []):
         store.scopes.append(Scope(f.eid, t, system, present_by_system.get(system, set())))
     if not scope_systems and "account_service" in present_by_system and any(
             t.startswith("customer_profiles_") for t in tables):
