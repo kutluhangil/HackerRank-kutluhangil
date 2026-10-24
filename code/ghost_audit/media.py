@@ -15,25 +15,35 @@ ISO = re.compile(r"^\d{4}-\d\d-\d\dT\d\d:\d\d(:\d\d)?Z$")
 
 
 def media_extractor(llm: LLM):
-    def extract(f: EvidenceFile) -> list[Obs]:
+    def extract(f: EvidenceFile, aliases: dict) -> list[Obs]:
         suffix = f.path.suffix.lower()
         text = pdf_text(f.path) if suffix == ".pdf" else ""
+        hint = ("Data-catalogue labels (label -> resource_id); when the artifact shows one of these labels, "
+                "report the record under that resource_id:\n" +
+                "\n".join(f"- {label} -> {rid}" for label, rid in sorted(aliases.items())))
         if suffix == ".pdf":
             content = [{"type": "text", "text": f"Artifact {f.path.name} (captured {f.captured_at}), "
-                                                f"extracted text:\n\n{text}"}]
+                                                f"extracted text:\n\n{text}\n\n{hint}"}]
         else:
             data = base64.standard_b64encode(f.path.read_bytes()).decode()
             content = [{"type": "image", "source": {"type": "base64", "media_type": "image/png", "data": data}},
-                       {"type": "text", "text": f"Artifact {f.path.name} (captured {f.captured_at})."}]
-        parsed = parse_json(llm.ask(f"media:{f.eid}", MEDIA_SYSTEM, content, effort="medium"))
+                       {"type": "text", "text": f"Artifact {f.path.name} (captured {f.captured_at}).\n\n{hint}"}]
+        answer = llm.ask(f"media:{f.eid}", MEDIA_SYSTEM, content, effort="medium")
+        parsed = parse_json(answer)
         if isinstance(parsed, dict) and isinstance(parsed.get("records"), list):
-            return [o for o in (_to_obs(f, r) for r in parsed["records"]) if o]
+            out = [o for o in (_to_obs(f, r, aliases) for r in parsed["records"]) if o]
+            llm.extractions[f.eid] = [vars(o) | {"idents": sorted(o.idents)} for o in out]
+            return out
+        if answer is not None:                      # live answer that is not usable JSON
+            llm.failures.append(f"media:{f.eid}: unparseable answer")
         return _fallback(f, text)
     return extract
 
 
-def _to_obs(f: EvidenceFile, r: dict):
+def _to_obs(f: EvidenceFile, r: dict, aliases: dict):
     rid = r.get("resource_id")
+    if rid in aliases:
+        rid = aliases[rid]
     if not rid or not RID_RE.fullmatch(str(rid)):
         return None
     system = system_of(rid)

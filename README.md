@@ -27,6 +27,7 @@ ORCHESTRATE_MODEL=claude-opus-5-5        # default
 
 ```bash
 python3 code/main.py            # offline/cache mode: no API calls; writes ./output.csv and ./output.usage.json
+python3 code/main.py --dry-run  # prints how many API requests a live run would send (cache misses); writes nothing
 python3 code/main.py --live     # additionally lets Claude classify request intent and read screenshots/PDFs
 python3 code/evaluation/validate_output.py     # output contract checks
 python3 code/evaluation/main.py                # score on the 32 labelled samples
@@ -36,6 +37,16 @@ python3 code/evaluation/usage_report.py        # writes code/evaluation/usage_re
 
 Model answers are cached in `code/cache/llm_cache.json` (keyed by model + prompt + input), so a re-run with the
 same inputs repeats no paid call and gives the same output.
+
+Safety of a live run: if any model call fails, is refused, is truncated or returns unusable JSON, the run stops
+with exit code 2 and `output.csv` is left untouched (successful answers stay cached, so a re-run only retries the
+failures). Output is written to a temporary file and swapped in atomically; the previous file is copied to
+`backups/` (outside `code/`). The key is read from the environment only and never printed or logged.
+
+Screenshots do not always print resource ids: a console shows `delivery_confirmation_19.pdf` or `user_17`
+where the data catalogue (`LINK_RESOURCE_IDENTITY` rows in `system_activity.csv`) maps that label to
+`object_19` / `tombstone_17`. These label -> id pairs are given to the model with every artifact and are also
+applied deterministically to its answer.
 
 ## Architecture
 

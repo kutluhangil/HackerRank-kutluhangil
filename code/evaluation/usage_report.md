@@ -1,6 +1,6 @@
 # Usage report
 
-Generated 2026-10-24T21:30Z from `output.usage.json`, the log of the run that produced `output.csv`.
+Generated 2026-10-24T21:38Z from `output.usage.json`, the log of the run that produced `output.csv`.
 
 ## Final full-dataset run (measured)
 

@@ -2,6 +2,7 @@
 
     python3 code/main.py                      # audits dataset/deletion_requests.csv -> ./output.csv
     python3 code/main.py --requests R --out O # any request file
+    python3 code/main.py --dry-run            # how many API calls a live run would make (no network)
     python3 code/main.py --live               # additionally allow Claude API calls (otherwise cache/offline)
 """
 from __future__ import annotations
@@ -9,7 +10,10 @@ from __future__ import annotations
 import argparse
 import csv
 import json
+import os
+import shutil
 import sys
+from datetime import datetime, timezone
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -57,10 +61,17 @@ def workflow_links(context, identities, planner, activity, intent) -> dict[str, 
     return batch_links(rows, subjects, owners, activity)
 
 
-def run_agent(requests_path: Path, out_path: Path, dataset: Path = DATASET, live: bool = False) -> list[dict]:
+class LiveRunFailed(RuntimeError):
+    pass
+
+
+def run_agent(requests_path: Path, out_path: Path, dataset: Path = DATASET, live: bool = False,
+              dry_run: bool = False) -> list[dict]:
     with open(dataset / "system_activity.csv", newline="", encoding="utf-8") as fh:
         activity = list(csv.DictReader(fh))
-    llm = LLM(ROOT / "code" / "cache" / "llm_cache.json", root=ROOT, live=live)
+    llm = LLM(ROOT / "code" / "cache" / "llm_cache.json", root=ROOT, live=live, dry_run=dry_run)
+    if live and not llm.online:
+        raise LiveRunFailed("--live needs ORCHESTRATE_ANTHROPIC_API_KEY (or ANTHROPIC_API_KEY) and the anthropic package")
     store = build_store(dataset, activity, media_extractor(llm))
     identities = IdentityIndex(dataset)
     planner = Planner(store, activity)
@@ -68,6 +79,15 @@ def run_agent(requests_path: Path, out_path: Path, dataset: Path = DATASET, live
         requests = list(csv.DictReader(fh))
     context = all_requests(requests, dataset)
     intent = classify_all(llm, context)
+    if dry_run:
+        print(f"dry run: {len(llm.planned)} API request(s) would be sent "
+              f"({sum(p == 'intent' for p in llm.planned)} intent, "
+              f"{sum(p.startswith('media') for p in llm.planned)} media); "
+              f"{sum(c['cached'] for c in llm.calls)} answer(s) already cached. Nothing written.")
+        return []
+    if llm.failures:   # never mix live answers with silent fallbacks: keep the previous output untouched
+        raise LiveRunFailed("live run had failed model calls (successful answers are cached; re-run to retry): "
+                            + "; ".join(llm.failures))
     links = workflow_links(context, identities, planner, activity, intent)
 
     rows = []
@@ -81,13 +101,22 @@ def run_agent(requests_path: Path, out_path: Path, dataset: Path = DATASET, live
                 status = "COMPLETE"
         rows.append({"case_id": req["case_id"], "deletion_status": status,
                      "steps_json": json.dumps(steps, ensure_ascii=False, separators=(",", ":"))})
-    with open(out_path, "w", newline="", encoding="utf-8") as fh:
+
+    # write next to the target, then swap atomically; keep the previous file as a timestamped backup
+    tmp = out_path.with_name(out_path.name + ".tmp")
+    with open(tmp, "w", newline="", encoding="utf-8") as fh:
         w = csv.DictWriter(fh, fieldnames=["case_id", "deletion_status", "steps_json"], lineterminator="\n")
         w.writeheader()
         w.writerows(rows)
-    usage_path = out_path.with_suffix(".usage.json")
-    usage_path.write_text(json.dumps({"model": llm.model, "live": llm.online, "requests": len(rows),
-                                      "calls": llm.calls}, indent=1))
+    if out_path.exists():
+        backups = ROOT / "backups"            # outside code/, so never packaged
+        backups.mkdir(exist_ok=True)
+        stamp = datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%SZ")
+        shutil.copy2(out_path, backups / f"{out_path.stem}.{stamp}{out_path.suffix}")
+    os.replace(tmp, out_path)
+    meta = {"model": llm.model, "live": llm.online, "requests": len(rows), "calls": llm.calls,
+            "media_extractions": llm.extractions}
+    out_path.with_suffix(".usage.json").write_text(json.dumps(meta, indent=1, default=sorted))
     return rows
 
 
@@ -97,9 +126,16 @@ def main():
     ap.add_argument("--out", default=str(ROOT / "output.csv"))
     ap.add_argument("--live", action="store_true",
                     help="allow Claude API calls (needs ORCHESTRATE_ANTHROPIC_API_KEY); default: cache + offline fallback")
+    ap.add_argument("--dry-run", action="store_true",
+                    help="count the API requests a live run would send (cache misses); no network, nothing written")
     args = ap.parse_args()
-    rows = run_agent(Path(args.requests), Path(args.out), live=args.live)
-    print(f"wrote {len(rows)} rows to {args.out} ({'live' if args.live else 'offline/cache'} mode)")
+    try:
+        rows = run_agent(Path(args.requests), Path(args.out), live=args.live, dry_run=args.dry_run)
+    except LiveRunFailed as e:
+        print(f"ERROR: {e}\n{args.out} was not modified.")
+        sys.exit(2)
+    if not args.dry_run:
+        print(f"wrote {len(rows)} rows to {args.out} ({'live' if args.live else 'offline/cache'} mode)")
 
 
 if __name__ == "__main__":

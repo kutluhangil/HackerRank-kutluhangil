@@ -36,7 +36,10 @@ def classify_all(llm, rows: list[dict], batch_size: int = 25) -> dict[str, bool]
     for start in range(0, len(texts), batch_size):
         chunk = texts[start:start + batch_size]
         payload = "\n".join(f"[{i}] {t}" for i, t in enumerate(chunk))
-        answer = parse_json(llm.ask("intent", INTENT_SYSTEM, [{"type": "text", "text": payload}], effort="low"))
+        raw = llm.ask("intent", INTENT_SYSTEM, [{"type": "text", "text": payload}], effort="low")
+        answer = parse_json(raw)
+        if raw is not None and (not isinstance(answer, list) or len(answer) != len(chunk)):
+            llm.failures.append(f"intent batch {start // batch_size}: unusable answer")
         if isinstance(answer, list):
             for item in answer:
                 try:

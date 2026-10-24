@@ -89,6 +89,16 @@ def render(usage: dict) -> str:
                   "- Cost uses Anthropic list prices per 1M tokens: " +
                   ", ".join(f"`{k}` ${v[0]:.2f} in / ${v[1]:.2f} out" for k, v in PRICES.items()) + ".",
                   "- Cached calls report the tokens of the original paid call; they cost nothing when replayed.", ""]
+    extractions = usage.get("media_extractions") or {}
+    if extractions:
+        lines += ["## What the model read from screenshots and PDFs (for human review)", "",
+                  "| File | Resource | Present | Direct identifiers | Enabled | Restore allowed | Identifiers |",
+                  "|---|---|---|---|---|---|---|"]
+        for eid, records in sorted(extractions.items()):
+            for r in records:
+                lines.append(f"| {eid} | {r['rid']} | {r['present']} | {r['pii']} | {r['enabled']} | "
+                             f"{r['restore_allowed']} | {len(r['idents'])} |")
+        lines.append("")
     lines += ["## Where the model is (and is not) used", "",
               "- Request intent: one call per 25 distinct request texts (multilingual DELETE vs NOT_DELETE).",
               "- Screenshots and PDFs: one call per artifact (15 files), producing structured observations.",

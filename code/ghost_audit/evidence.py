@@ -120,6 +120,7 @@ class EvidenceStore:
         self.scopes: list[Scope] = []
         self.files: dict[str, EvidenceFile] = {}
         self.links: list[tuple[str, str, str, set]] = []   # (eid, t, rid, idents) catalogue links
+        self.aliases: dict[str, str] = {}                     # display label -> resource id (data catalogue)
 
     def add(self, o: Obs):
         if o.rid and o.system:
@@ -485,6 +486,12 @@ def ingest_activity(store: EvidenceStore, rows: Iterable[dict]):
         et, rid, det = r["event_type"], r["resource_id"], r["details"]
         if et == "LINK_RESOURCE_IDENTITY":
             store.links.append((r["activity_id"], r["event_time"], rid, idents_in_text(det)))
+            m = re.search(r"\b%s \(([^)]+)\)" % re.escape(rid), det)
+            if m and m[1] != rid:
+                store.aliases[m[1]] = rid
+        elif et == "RESTORE_BACKUP" and r["reported_result"] == "SUCCESS" and system_of(rid) == "backup_service":
+            store.add(Obs(r["activity_id"], r["event_time"], "backup_service", rid, present=True,
+                          restore_allowed=True, source="activity:restore_job"))
         elif et == "CHECK_DATA_FLOW" and "remains enabled" in det:
             store.add(Obs(r["activity_id"], r["event_time"], "integration_service", rid, present=True, enabled=True,
                           source="activity:check"))
@@ -520,6 +527,7 @@ def load_manifest(dataset: Path) -> list[EvidenceFile]:
 
 def build_store(dataset: Path, activity_rows: list[dict], media_extractor=None) -> EvidenceStore:
     store = EvidenceStore()
+    ingest_activity(store, activity_rows)          # first: catalogue aliases help read screenshots
     for f in load_manifest(dataset):
         store.files[f.eid] = f
         if not f.path.exists():
@@ -534,7 +542,6 @@ def build_store(dataset: Path, activity_rows: list[dict], media_extractor=None) 
         elif suffix == ".txt":
             ingest_text(store, f)
         elif suffix in (".png", ".jpg", ".jpeg", ".pdf") and media_extractor is not None:
-            for o in media_extractor(f):
+            for o in media_extractor(f, store.aliases):
                 store.add(o)
-    ingest_activity(store, activity_rows)
     return store

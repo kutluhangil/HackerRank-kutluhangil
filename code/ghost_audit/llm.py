@@ -34,7 +34,7 @@ def _load_dotenv(root: Path):
 
 class LLM:
     def __init__(self, cache_path: Path, root: Optional[Path] = None, model: str = DEFAULT_MODEL,
-                 live: bool = False):
+                 live: bool = False, dry_run: bool = False):
         if root:
             _load_dotenv(root)
         self.model = model
@@ -42,6 +42,10 @@ class LLM:
         self.cache: dict = json.loads(cache_path.read_text()) if cache_path.exists() else {}
         self.lock = threading.Lock()
         self.calls: list[dict] = []          # every request made in this run (live or cached)
+        self.failures: list[str] = []        # live requests that failed or gave unusable answers
+        self.planned: list[str] = []         # dry run: requests that would go to the API (cache misses)
+        self.extractions: dict = {}          # media file -> observations the model reported
+        self.dry_run = dry_run
         self.live = live
         key = os.environ.get("ORCHESTRATE_ANTHROPIC_API_KEY") or os.environ.get("ANTHROPIC_API_KEY")
         self.client = None
@@ -66,6 +70,9 @@ class LLM:
             self.calls.append({"purpose": purpose, "model": hit.get("model", self.model), "cached": True,
                                "input_tokens": hit["input_tokens"], "output_tokens": hit["output_tokens"]})
             return hit["text"]
+        if self.dry_run:
+            self.planned.append(purpose)
+            return None
         if not self.online:
             return None
         import anthropic
@@ -76,9 +83,10 @@ class LLM:
                 messages=[{"role": "user", "content": content}],
             )
         except (anthropic.APIStatusError, anthropic.APIConnectionError) as e:
-            print(f"[llm] {purpose}: request failed ({type(e).__name__}); using fallback")
+            self.failures.append(f"{purpose}: {type(e).__name__}")
             return None
-        if resp.stop_reason == "refusal":
+        if resp.stop_reason in ("refusal", "max_tokens"):
+            self.failures.append(f"{purpose}: stop_reason={resp.stop_reason}")
             return None
         text = "".join(b.text for b in resp.content if b.type == "text")
         rec = {"text": text, "model": resp.model, "input_tokens": resp.usage.input_tokens,

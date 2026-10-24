@@ -17,12 +17,16 @@ State after session 1 (see log.txt for times). Deadline (assumed from the email 
 
 ## Next
 0. **Do not make any Claude API call until the user explicitly approves it in chat.** Live calls need `--live`.
-1. New session has `ORCHESTRATE_ANTHROPIC_API_KEY` (cloud env variable). After approval: `python3 code/main.py --live`
-   (answers are cached), then `python3 code/evaluation/main.py`, `validate_output.py`, `custom_cases.py`,
-   `usage_report.py`, and update the numbers in `evaluation_report.md`.
-2. Check media extraction output for the 11 PNGs + 4 PDFs (users 11-22 cases 33+).
-3. Package: `zip -r code.zip README.md code -x "*/__pycache__/*" "*/.venv/*" "*/venv/*" "*/node_modules/*" "*/.git/*" "*/.DS_Store"`.
-4. Keep appending to `log.txt` with real `date -u` timestamps.
+1. Preview without network: `python3 code/main.py --dry-run` (expected: 31 requests = 16 intent + 15 media).
+2. After approval: `python3 code/main.py --live`. Exit code 2 = some call failed; output.csv untouched; re-run retries only failures.
+3. Then (all offline, cache only):
+   `python3 code/evaluation/validate_output.py`
+   `python3 code/evaluation/main.py`
+   `python3 code/evaluation/custom_cases.py`
+   `python3 code/evaluation/usage_report.py`
+   Review the media table in usage_report.md; update numbers/status lines in evaluation_report.md.
+4. Package: `zip -r code.zip README.md code -x "*/__pycache__/*" "*/.venv/*" "*/venv/*" "*/node_modules/*" "*/.git/*" "*/.DS_Store"`.
+5. Keep appending to `log.txt` with real `date -u` timestamps.
 
 ## Known gaps
 - Some gold resources are not discoverable from participant data (e.g. audit_record_6645, 5569).
