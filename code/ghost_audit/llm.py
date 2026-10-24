@@ -18,6 +18,7 @@ API_URL = "https://api.anthropic.com"          # pinned: the environment may poi
 DEFAULT_MODEL = os.environ.get("ORCHESTRATE_MODEL", "claude-opus-5-5")
 PRICES = {  # USD per 1M tokens (input, output)
     "claude-opus-5-5": (4.00, 20.00),
+    "claude-opus-4-8": (5.00, 25.00),      # server-side refusal fallback target
     "claude-sonnet-5-5": (2.00, 10.00),
     "claude-haiku-5-5": (0.10, 0.50),
 }
@@ -77,10 +78,12 @@ class LLM:
             return None
         import anthropic
         try:
-            resp = self.client.messages.create(
+            # a safety-classifier decline is re-run server-side on Anthropic's recommended fallback model
+            resp = self.client.beta.messages.create(
                 model=self.model, max_tokens=max_tokens, system=system,
                 output_config={"effort": effort},
                 messages=[{"role": "user", "content": content}],
+                betas=["server-side-fallback-2026-07-01"], fallbacks="default",
             )
         except (anthropic.APIStatusError, anthropic.APIConnectionError) as e:
             self.failures.append(f"{purpose}: {type(e).__name__}")
@@ -106,11 +109,10 @@ def parse_json(text: Optional[str]):
         return None
     fenced = re.search(r"```(?:json)?\s*(.*?)```", text, re.S)
     candidate = fenced.group(1) if fenced else text
-    for opener in ("[", "{"):
-        i = candidate.find(opener)
-        if i >= 0:
-            try:
-                return json.loads(candidate[i:candidate.rfind("]" if opener == "[" else "}") + 1])
-            except json.JSONDecodeError:
-                continue
+    # decode from the first opener, so {"records": [...]} yields the object, not its inner list
+    for i in sorted(i for i in (candidate.find("["), candidate.find("{")) if i >= 0):
+        try:
+            return json.JSONDecoder().raw_decode(candidate, i)[0]
+        except json.JSONDecodeError:
+            continue
     return None

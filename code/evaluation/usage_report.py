@@ -19,7 +19,7 @@ from ghost_audit.llm import PRICES  # noqa: E402
 
 ESTIMATE = """## Pre-run estimate (NOT measured)
 
-Made before any live call, from input sizes; replace by the measured tables above after the live run.
+Made before any live call, from input sizes; kept only for comparison with the measured tables above.
 
 | Workload | Calls | Est. input tokens | Est. output tokens (incl. thinking) |
 |---|---|---|---|
@@ -105,6 +105,9 @@ def render(usage: dict) -> str:
               "- Everything else (parsing 79 structured evidence files, identity resolution, state reconstruction, "
               "policy mapping, step ordering) is deterministic Python: 0 tokens.", "",
               ESTIMATE]
+    notes = Path(__file__).with_name("usage_notes.md")      # hand-written facts the run log cannot know
+    if notes.exists():
+        lines += ["", notes.read_text().strip(), ""]
     return "\n".join(lines)
 
 
