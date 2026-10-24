@@ -94,3 +94,23 @@ branch=main
 repo_root=/home/user/hackerrank-kutluhangil
 worktree=main
 parent_agent=none
+
+## [2026-10-24T20:58:00Z] Guide user to add Anthropic key as a network secret
+
+User Prompt (verbatim, secrets redacted):
+[Two screenshots: "Add secret" dialog (Secret type Bearer, Allowed websites, Path prefixes, Custom headers Authorization/Bearer/value) and "Edit cloud environment" dialog (Network access Limited, Allowed domains, Network secrets, Setup script, Environment variables)]
+5 dolarlık aldım. Yukardan "Edit cloud Enviromonet" kısmı var ona bastım ama tam nereye tacağım anlamadım. Sana görselleri veriyorum.
+
+Agent Response Summary:
+Recommended storing the key as a Network secret (proxy-injected, never visible inside the container or the log) rather than as a plain environment variable. Gave exact field values: allowed website api.anthropic.com, header name x-api-key with empty prefix (Anthropic does not use "Authorization: Bearer"). The code will read ANTHROPIC_API_KEY from the environment when present (local Mac via .env) and fall back to a placeholder so the proxy-injected header is used in the cloud; a one-call connectivity test will confirm after the user saves.
+
+Actions:
+* Appended this log entry, committed and pushed
+
+Context:
+tool=Claude Code
+model=claude-opus-5-5
+branch=main
+repo_root=/home/user/hackerrank-kutluhangil
+worktree=main
+parent_agent=none
