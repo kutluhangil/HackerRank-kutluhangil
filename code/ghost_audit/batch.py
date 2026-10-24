@@ -13,9 +13,12 @@ from __future__ import annotations
 
 from datetime import datetime, timedelta
 
+from .evidence import system_of
+
 STATUS_RESULT = {"COMPLETE": "SUCCESS", "PARTIALLY_COMPLETE": "PARTIAL", "NOT_STARTED": "FAILED"}
 POLICY_EVENTS = {"ANONYMIZE_RECORD", "REDACT_RECORD", "DISABLE_DATA_FLOW", "BLOCK_RESTORE", "DELETE_RECORD",
                  "RETAIN_RECORD"}
+MODE = "strict"
 BEFORE, AFTER = timedelta(hours=3), timedelta(minutes=30)
 
 
@@ -68,13 +71,20 @@ def batch_links(requests: list[dict], subjects: dict, owners: dict, activity: li
             links.setdefault(cid, set()).add(a["resource_id"])
 
         # ---- policy actions on other systems, in account-processing order
-        order = sorted(acct_of, key=case_num)
+        order = sorted(uid, key=case_num)
         by_system: dict[str, list[dict]] = {}
         for a in window:
             if a["event_type"] in POLICY_EVENTS and a["target_system"] != "account_service":
                 by_system.setdefault(a["target_system"], []).append(a)
+        owned_systems = {}
+        for rid, users in owners.items():
+            sys_ = system_of(rid)
+            for u in users:
+                for cid in by_user.get(u, []):
+                    owned_systems.setdefault(cid, set()).add(sys_)
         for system, acts in by_system.items():
-            claimed = set()                         # cases that already own a resource of this system
+            # cases whose own record of this system is already known from evidence don't take anonymous actions
+            claimed = {cid for cid in uid if system in owned_systems.get(cid, set())}
             free = []
             for a in sorted(acts, key=lambda a: a["event_time"]):
                 own = owners.get(a["resource_id"], set())
@@ -86,6 +96,8 @@ def batch_links(requests: list[dict], subjects: dict, owners: dict, activity: li
                 elif not own:
                     free.append(a)
             takers = [cid for cid in order if cid not in claimed]
+            if MODE == "strict" and len(free) != len(takers):
+                continue
             for a, cid in zip(free, takers):
                 links.setdefault(cid, set()).add(a["resource_id"])
     return links

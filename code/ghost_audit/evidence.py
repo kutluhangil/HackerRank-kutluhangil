@@ -408,8 +408,10 @@ def ingest_log(store: EvidenceStore, f: EvidenceFile):
     for events in traces.values():
         idents = set()
         for _, d in events:
-            for k in KEY_FIELDS:
-                n = norm_ident(d.get(k))
+            for k, v in d.items():
+                if k in ("trace_id", "requestId", "resource_id", "event", "service"):
+                    continue
+                n = norm_ident(v)
                 if n:
                     idents.add(n)
         for ts, d in events:

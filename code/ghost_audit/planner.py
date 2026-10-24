@@ -23,6 +23,11 @@ STATE = {
 }
 
 
+RETAINED_SYSTEMS = {"security_service", "legal_service"}
+# Snapshots are complete listings only for the account tables; other collections are samples.
+OMISSION_SYSTEMS = {"account_service"}
+
+
 @dataclass
 class ResourceView:
     rid: str
@@ -103,7 +108,8 @@ class Planner:
     def related_resources(self, subj: Subject, audit_at: str, extra: set = frozenset()) -> set[str]:
         rids = set(extra)
         for o in self.store.obs:
-            if o.idents & subj.idents and self.available(o, audit_at):
+            if o.idents & subj.idents and (self.available(o, audit_at) or (
+                    o.t <= audit_at and o.system in RETAINED_SYSTEMS)):
                 rids.add(o.rid)
         for eid, t, rid, idents in self.store.links:
             if t <= audit_at and idents & subj.idents:
@@ -120,7 +126,7 @@ class Planner:
         if not any(system_of(r) == "account_service" for r in rids):
             m = re.match(r"user_(\d+)$", subj.user_id)
             guess = f"account_{int(m[1]):03d}" if m else None
-            if guess and (guess in self.by_rid or guess in self.activity_rids):
+            if guess and int(m[1]) < 100:
                 rids.add(guess)
         return rids
 
@@ -128,7 +134,7 @@ class Planner:
         system = system_of(rid)
         cands = [o for o in self.by_rid.get(rid, []) if self.available(o, audit_at)]
         for sc in self.store.scopes:
-            if sc.system == system and rid not in sc.rids and sc.t <= audit_at and \
+            if sc.system == system and system in OMISSION_SYSTEMS and sc.rids and rid not in sc.rids and sc.t <= audit_at and \
                     self.store.files[sc.eid].captured_at <= audit_at:
                 cands.append(Obs(sc.eid, sc.t, system, rid, present=False, source="scope:omission"))
         if not cands:
@@ -146,6 +152,13 @@ class Planner:
             hist = [o for o in self.by_rid.get(rid, []) if self.available(o, audit_at)]
             category, action = category_of(system, hist)
             st = self.state_at(rid, audit_at)
+            if st is None and action == "RETAIN":
+                # retained records may be known only from a later export of an earlier snapshot:
+                # enough to plan a future check, never enough to cite as proof
+                later = [o for o in self.by_rid.get(rid, []) if o.t <= audit_at]
+                st = max(later, key=lambda o: o.t, default=None)
+                if st is not None:
+                    st = Obs("", st.t, st.system, rid, present=st.present, retention_until=st.retention_until)
             if st is None:
                 continue
             ev = st.eid
