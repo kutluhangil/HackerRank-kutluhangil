@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="24" viewBox="0 0 1200 24" role="img" aria-label="divider">
+  <defs>
+    <style>
+      .sweep { animation: laser-sweep 4.5s cubic-bezier(0.4, 0, 0.2, 1) infinite; }
+      @keyframes laser-sweep {
+        0% { transform: translateX(-300px); }
+        100% { transform: translateX(1200px); }
+      }
+      @media (prefers-reduced-motion: reduce) {
+        .sweep { animation: none; opacity: 0; }
+      }
+    </style>
+    <linearGradient id="laser-beam" x1="0" x2="1">
+      <stop offset="0%" stop-color="#00ffcc" stop-opacity="0" />
+      <stop offset="60%" stop-color="#00ffcc" stop-opacity="0.9" />
+      <stop offset="85%" stop-color="#38bdf8" stop-opacity="1" />
+      <stop offset="100%" stop-color="#ffffff" />
+    </linearGradient>
+    <linearGradient id="laser-rail" x1="0" x2="1">
+      <stop offset="0%" stop-color="#162238" stop-opacity="0" />
+      <stop offset="50%" stop-color="#1e3a5f" stop-opacity="0.6" />
+      <stop offset="100%" stop-color="#162238" stop-opacity="0" />
+    </linearGradient>
+    <filter id="laser-glow" x="-20%" y="-400%" width="140%" height="900%">
+      <feGaussianBlur stdDeviation="4" />
+    </filter>
+  </defs>
+  <!-- Background Guide Rail -->
+  <rect y="11.5" width="1200" height="1" fill="url(#laser-rail)" />
+  <!-- Moving Laser Beam with Glow -->
+  <g class="sweep">
+    <rect y="9.5" width="280" height="5" rx="2.5" fill="url(#laser-beam)" filter="url(#laser-glow)" />
+    <rect y="11" width="280" height="2" rx="1" fill="url(#laser-beam)" />
+  </g>
+</svg>
